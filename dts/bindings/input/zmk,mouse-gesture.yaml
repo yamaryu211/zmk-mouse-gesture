@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: MIT
+
+description: ZMK Mouse Gesture Input Processor
+
+compatible: "zmk,mouse-gesture"
+
+include: input-processor.yaml
+
+properties:
+  stroke-size:
+    type: int
+    default: 200
+    description: Size of one stroke in a gesture
+
+  enable-eager-mode:
+    type: boolean
+    default: false
+    description: Enable eager mode for immediate gesture recognition
+
+  idle-timeout-ms:
+    type: int
+    default: 150
+    description: Time in milliseconds to wait for idle before invoking bindings
+
+  movement-threshold:
+    type: int
+    default: 10
+    description: Threshold for each x/y event
+
+  gesture-cooldown-ms:
+    type: int
+    default: 500
+    description: Time in milliseconds to stop processing for next gesture after execution
+
+child-binding:
+  description: Mouse gesture pattern
+  type: phandle-array
+  child-binding:
+    properties:
+      pattern:
+        type: array
+        description: Gesture pattern sequence
+      bindings:
+        type: phandle-array
+        description: Bindings to execute when pattern matches
